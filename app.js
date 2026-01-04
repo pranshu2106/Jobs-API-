@@ -33,6 +33,9 @@ app.use(helmet()) ;
 // extra packages
 
 // routes
+app.get('/', (req, res) => {
+  res.send('<h1>Jobs API</h1><a href="/api-docs">Documentation</a>');
+});
 app.use('/api/v1/auth',authRouter) ;
 app.use('/api/v1/jobs',authMiddleware,jobsRouter) ; 
 
