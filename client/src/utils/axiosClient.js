@@ -2,8 +2,9 @@ import axios from 'axios';
 import { getToken, removeToken, isTokenValid } from './authHelpers';
 import toast from 'react-hot-toast';
 
-// API Base URL - must be set via environment variable for production
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api/v1';
+// API Base URL - uses relative path in production (same origin), absolute in development
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ||
+    (import.meta.env.DEV ? 'http://localhost:5000/api/v1' : '/api/v1');
 
 // Warn in development if env var is not explicitly set
 if (!import.meta.env.VITE_API_BASE_URL && import.meta.env.DEV) {
@@ -15,7 +16,7 @@ const axiosClient = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
-    withCredentials: true, 
+    withCredentials: true,
 });
 
 // Request interceptor - attach JWT token
