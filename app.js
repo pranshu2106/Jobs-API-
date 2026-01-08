@@ -32,7 +32,6 @@ app.use(
 app.use(express.json());
 app.use(xss());
 // Allowed origins for CORS (development + production)
-//ddbrbr
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
