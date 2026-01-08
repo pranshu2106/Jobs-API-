@@ -32,6 +32,7 @@ app.use(
 app.use(express.json());
 app.use(xss());
 // Allowed origins for CORS (development + production)
+// Allowed origins for CORS (development + production)
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
@@ -45,9 +46,9 @@ app.use(cors({
     if (allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    callback(new Error('Not allowed by CORS'));
+    return callback(null, false); // block without throwing error
   },
-  methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], // include OPTIONS for preflight
   credentials: true
 }));
 app.use(helmet());
